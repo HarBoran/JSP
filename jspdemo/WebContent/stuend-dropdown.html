@@ -1,0 +1,47 @@
+<html>
+
+<head><title>Student Registration Form</title></head>
+
+<body>
+	<!-- form 어디로 보낼지, 어떤 방식으로 보낼지 지정함 -->
+<form action="student-dropdown-response.jsp">
+	<fieldset style = "width:200">
+	First name : <input type = "text" name = "firstName"/>
+	<br/><br/>
+
+	Last name : <input type = "text" name = "lastName"/>
+	<br/><br/>
+	</fieldset>
+	
+	<!-- 라디오버튼 -->
+	Favorite Programing Language "radio": </br>
+	<input type = "radio" name = "language" value = "Java"> Java
+	<input type = "radio" name = "language" value = "C#"> C#
+	<input type = "radio" name = "language" value = "PHP"> PHP
+	<input type = "radio" name = "language" value = "Ruby"> Ruby
+	<br/><br/>
+	
+	<!-- 체크박스 -->
+	Favorite Programing Language "checkbox": </br>
+	<input type = "checkbox" name = "Programinglanguage" value = "Java"> Java
+	<input type = "checkbox" name = "Programinglanguage" value = "C#"> C#
+	<input type = "checkbox" name = "Programinglanguage" value = "PHP"> PHP
+	<input type = "checkbox" name = "Programinglanguage" value = "Ruby"> Ruby
+	<br/><br/>
+	
+	<!-- 드랍다운 -->
+	<select name = "country">
+	<option>Brazil</option>
+	<option>France</option>
+	<option>Germany</option>
+	<option>United Kingdom</option>
+	<option>United States of America</option>
+	</select>
+	
+	<input type = "submit" value = "Submit"/>
+
+</form>
+
+</body>
+
+</html>
