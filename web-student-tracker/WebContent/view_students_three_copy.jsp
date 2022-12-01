@@ -14,7 +14,7 @@
 <body>
 	
 	<hr>
-	<% List<Student> theStudents = (List<Student>)request.getAttribute("student_list");	%>
+	<%-- <% List<Student> theStudents = (List<Student>)request.getAttribute("student_list");	%> --%>
 <%-- 	
 	<%= theStudents %>
 	<hr>

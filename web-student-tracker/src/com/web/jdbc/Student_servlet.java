@@ -80,8 +80,9 @@ public class Student_servlet extends HttpServlet {
 		request.setAttribute("student_list", tempstudent);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/update-student-form.jsp");
 		dispatcher.forward(request, response);
+		//response.sendRedirect(request.getContextPath()+"/update-student-form.jsp");
 	}
-	
+		
 	
 	protected void UpdateStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		

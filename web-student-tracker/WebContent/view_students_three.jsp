@@ -39,8 +39,8 @@
 	 <div class ="container">
 	 <input type="button" class="btn btn-info" value="Add Student" 
 			onclick="window.location.href='add-student-form.jsp'; return false;">
-	<a href="student_servlet" role="button" class="btn btn-success">Refresh</a>
-		
+	<a href="student_servlet" class="btn btn-success">Refresh</a>
+
 		<table class="table table-hover">
 		<tr class="table-info">			
 			<th>First Name</th>
