@@ -19,8 +19,27 @@ private DataSource dataSource;
 		dataSource = theDataSource;
 	}
 	
+		
 	
-	public Student dbUtil(int id) throws Exception{
+	public void deleteStudent(int id) throws Exception{
+		Connection conn = null;
+		PreparedStatement pst = null;
+				
+		try {
+			conn =  dataSource.getConnection();
+			String sql = "DELETE FROM student WHERE (id = ?)";
+			pst= conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			pst.executeUpdate();			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(conn, pst , null);
+		}
+	}
+	
+	public Student loadStudent(int id) throws Exception{
 		
 		Connection conn = null;
 		PreparedStatement pst = null;
@@ -38,10 +57,10 @@ private DataSource dataSource;
 			Student student = new Student(id ,myRs.getString("first_name"), myRs.getString("last_name"), myRs.getString("email"));
 			return student;
 	
-		/*}catch(Exception e){
-			System.out.println("Couldn't close connection: " + e.getMessage());
-			e.printStackTrace();*/
-			
+//		}catch(Exception e){
+//			System.out.println("Couldn't close connection: " + e.getMessage());
+//			e.printStackTrace();
+						
 		}finally {
 			close(conn, pst, myRs);
 		}
@@ -83,19 +102,11 @@ private DataSource dataSource;
 					+ "VALUES(?, ? ,?)";
 			
 			pst = conn.prepareStatement(sql);
-			//pst.setString(1, firstname);
-			//pst.setString(2, lastname);
-			//pst.setString(3, email);
+
 			pst.setString(1, student.getFirstName());
 			pst.setString(2, student.getLastName());
 			pst.setString(3, student.geteMail());
-			
-		 	//if((item != null) && (item.trim().length() > 0) && (!todo.contains(item))){
-		 		
-		 		//todo.add(item.trim());
-		 		
-			//}
-		 	
+
 			pst.executeUpdate();
 
 		}catch(Exception e) {

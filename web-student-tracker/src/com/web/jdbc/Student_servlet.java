@@ -50,72 +50,74 @@ public class Student_servlet extends HttpServlet {
 		}
 		
 		switch(checkPage) {
-		case "LIST":
-			listStudents(request, response);
-			break;
-		case "ADD":
-			addStudents(request, response);
-			break;
-		case "LOAD":
-			loadStudents(request, response);
-			break;
-		case "Update":
-			UpdateStudents(request, response);	
-			break;
-		default:
-			listStudents(request, response);
+			case "LIST":
+				listStudents(request, response);
+				break;
+			case "ADD":
+				addStudents(request, response);
+				break;
+			case "LOAD":
+				loadStudent(request, response);
+				break;
+			case "Update":
+				UpdateStudents(request, response);	
+				break;
+			case "DELETE":
+				DeleteStudents(request, response);
+				break;
+			default:
+				listStudents(request, response);
 		}
 	}catch(Exception e) {
 		throw new ServletException(e);
 		}
-	
 	}
 	
-	protected void loadStudents(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void loadStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int id = Integer.valueOf(request.getParameter("id"));
-	
-		try {
-
-			Student tempstudent = student_model.dbUtil(id);
-
-			request.setAttribute("student_list", tempstudent);
-			
-	
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("/update-student-form.jsp");
-		  
-			dispatcher.forward(request, response);
+		Student tempstudent = student_model.loadStudent(id);
+		request.setAttribute("student_list", tempstudent);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/update-student-form.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	
-	protected void UpdateStudents(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void UpdateStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		int id = Integer.valueOf(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email= request.getParameter("eMail");
 		
 		Student student = new Student(id, firstName, lastName, email);
 		
-		try {
-	
+		try {	
 			student_model.UpdateStudent(student);
-
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
-	}
-
-
-
+		
+	//	response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/student_servlet?command=LIST");
+		dispatcher.forward(request, response);
 	
-	protected void addStudents(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+	protected void DeleteStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int id = Integer.valueOf(request.getParameter("id"));
+		
+//		try {
+			
+			student_model.deleteStudent(id);
+		
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+		response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
+		
+	}
+		
+	protected void addStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		//서블릿에 직접 출력해 테스트 해보기 위해 사용함
 		//PrintWriter out = response.getWriter();
@@ -126,38 +128,30 @@ public class Student_servlet extends HttpServlet {
 		String email= request.getParameter("eMail");
 				
 		Student student = new Student(firstName, lastName, email);
-		
-		
-		
-		try {
-			//out.print(firstName + lastName + email);
-							
-			//student_model.addStudent(firstName,lastName, email);
+				
+//		try {
 			student_model.addStudent(student);
 			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
 	}
 
-	protected void listStudents(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+	protected void listStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		//서블릿에 직접 출력해 테스트 해보기 위해 사용함
 		//PrintWriter out = response.getWriter();
 		//response.setContentType("text/plain");
-		
-		
+				
 		try {
 			List<Student> students = student_model.getStudents();
-			//out.print(students);
 			request.setAttribute("student_list", students);
 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher dispatcher =
-			request.getRequestDispatcher("/view_students_three.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/view_students_three.jsp");
 	  
 		dispatcher.forward(request, response);
 	}
