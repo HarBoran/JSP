@@ -41,7 +41,7 @@ public class Student_servlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 	try {	
 		String checkPage = request.getParameter("command");
 	
@@ -69,13 +69,14 @@ public class Student_servlet extends HttpServlet {
 				listStudents(request, response);
 		}
 	}catch(Exception e) {
+		log("error catch", e);
 		throw new ServletException(e);
 		}
 	}
 	
 	protected void loadStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int id = Integer.valueOf(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		Student tempstudent = student_model.loadStudent(id);
 		request.setAttribute("student_list", tempstudent);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/update-student-form.jsp");
@@ -93,15 +94,16 @@ public class Student_servlet extends HttpServlet {
 		
 		Student student = new Student(id, firstName, lastName, email);
 		
-		try {	
+		//try {	
 			student_model.UpdateStudent(student);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		//}catch(Exception e) {
+			//e.printStackTrace();
+		//}
 		
-	//	response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/student_servlet?command=LIST");
-		dispatcher.forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/student_servlet?command=LIST");
+		//listStudents(request, response);
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/student_servlet?command=LIST");
+		//dispatcher.forward(request, response);
 	
 	}
 	protected void DeleteStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -144,17 +146,26 @@ public class Student_servlet extends HttpServlet {
 		//PrintWriter out = response.getWriter();
 		//response.setContentType("text/plain");
 				
-		try {
+		//try {
 			List<Student> students = student_model.getStudents();
 			request.setAttribute("student_list", students);
 
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	//	}catch(Exception e) {
+	//		e.printStackTrace();
+	//	}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/view_students_three.jsp");
-	  
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/view_students_three.jsp");	  
 		dispatcher.forward(request, response);
+		//response.sendRedirect(request.getContextPath()+"/view_students_three.jsp");
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+		System.out.print("Destoy");		
+	}
+	
+	
 	
 }

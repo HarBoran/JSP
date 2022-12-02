@@ -5,9 +5,9 @@
 <body>
 
 	Let's have some test :
-	</br>
+	<br>
 	<%=Exutil.makeItLower("HAPPY HAPPY HAPPY")%>
-	</br>
+	<br>
 	<%= com.Exutil.makeItLower("HAPPY HAPPY HAPPY")%>
 
 
