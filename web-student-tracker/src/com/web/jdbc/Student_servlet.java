@@ -107,7 +107,7 @@ public class Student_servlet extends HttpServlet {
 	
 	}
 	protected void DeleteStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		int id = Integer.valueOf(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 //		try {
 			
