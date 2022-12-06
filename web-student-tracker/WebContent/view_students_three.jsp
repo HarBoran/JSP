@@ -116,7 +116,10 @@
 	</div>
 	<hr><hr><hr>
 	
-	<div id="map" style="width:500px;height:400px;left:200px"></div>	
+	<div id="map" style="width:500px;height:400px;left:200px"></div>
+	<% String appkey;%>
+	<% appkey = "09435e8a15e006b36a9a83d98131dd0f"; %>
+	<% %>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=09435e8a15e006b36a9a83d98131dd0f"></script>
 	<script>
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -127,7 +130,7 @@
 		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	</script>
 	
-	
+
 </body>
 
 </html>
