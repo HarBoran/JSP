@@ -47,7 +47,9 @@
 	    $(document).ready(function(){
 			$(".deletelink").click(function(){
 				if(confirm("Data will be delete")){
-	                alert("Delating");
+					var ggg = $("#qwer").html();
+	                alert(ggg);
+	                //alert("Delating");
 	            }else{
 	                return false;
 	            }
@@ -95,7 +97,7 @@
 		
 			<c:forEach var= "tempStudent" items = "${student_list}">
 				<tr>
-					<td>${tempStudent.firstName} </td>
+					<td id = "qwer">${tempStudent.firstName} </td>
 					<td>${tempStudent.lastName} </td>
 					<td>${tempStudent.eMail} </td>
 						<c:url var = "tempLink" value="/student_servlet">

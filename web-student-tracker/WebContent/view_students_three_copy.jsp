@@ -62,7 +62,7 @@
 								<c:param name = "command" value = "LOAD"/>
 								<c:param name = "id" value = "${tempStudent.id}"/>
 							</c:url>
-						<td><a href = "${tempLink}">Update</a><td>
+						<td><a href = "${tempLink}" class="btn btn-outline-warning">Update</a><td>
 					</tr>			
 				</c:forEach>
 			</table>
